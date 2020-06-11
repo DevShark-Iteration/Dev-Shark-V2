@@ -1,5 +1,12 @@
 import React from 'react';
-import { Container, Typography, AppBar, Tabs, Tab, Button } from '@material-ui/core';
+import {
+  Container,
+  Typography,
+  AppBar,
+  Tabs,
+  Tab,
+  Button,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import NavContainer from './NavContainer';
 import FeedContainer from './FeedContainer';
@@ -23,20 +30,24 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   header: {
-    display: 'inline',
+    fontWeight: 600,
+    fontSize: 36,
   },
   subHeader: {
-    display: 'inline',
-    marginLeft: theme.spacing(2),
-    fontSize: 15
+    // display: 'inline',
+    marginLeft: theme.spacing(12),
+    fontSize: 25,
   },
   loginButton: {
-    display: 'inline',
+    // display: 'inline',
     marginLeft: '50%',
-    border: '1px solid'
+    border: '1px solid',
+    '&:hover': {
+      backgroundColor: '#efefef',
+    },
   },
   logoutButton: {
-    display: 'inline',
+    // display: 'inline',
     marginLeft: '50%',
     border: '1px solid',
   },
@@ -46,21 +57,23 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginLeft: theme.spacing(2),
-    fontSize: 12
+    fontSize: 12,
   },
   email: {
-    paddingRight: '10px'
-  }
+    paddingRight: '10px',
+  },
 }));
 
 const mapStateToProps = (state) => ({
   //add pertinent state
-  resources: state
-})
+  resources: state,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   //set up action dispathes
-  login: (email, password) => { dispatch(actions.login(email, password)) },
+  login: (email, password) => {
+    dispatch(actions.login(email, password));
+  },
   logout: () => dispatch(actions.logout()),
 
   getResources: (tech_name) => {
@@ -70,37 +83,53 @@ const mapDispatchToProps = (dispatch) => ({
   getTopics: () => {
     dispatch(actions.getTopics());
   },
-})
+});
 
 // holds our top header bar, as well as our side bar (drawer), will also hold our feed container
 const MainContainer = (props) => {
   const classes = useStyles();
   // functions as css-reset
 
-  console.log('Props', props)
-  console.log(`RESOURCES: ${props.resources.currentUser}`)
-  console.log(`LOGGED IN: ${props.resources.isLoggedin}`)
-  console.log(`RESOURCES 2: ${props.resources.resources}`)
+  // console.log('Props', props);
+  // console.log(`RESOURCES: ${props.resources.currentUser}`);
+  // console.log(`LOGGED IN: ${props.resources.isLoggedin}`);
+  // console.log(`RESOURCES 2: ${props.resources.resources}`);
 
   return (
     <Container maxWidth="lg" className={classes.root}>
       {/* AppBar, where the title of website is, stays on top*/}
       <AppBar position="fixed" className={classes.appBar}>
-        <Typography variant="h4" align="left" className={classes.header}>
+        <Typography variant="h1" align="left" className={classes.header}>
           {'</DevShark>'}
-          <Typography variant="inherit" className={classes.subHeader}>
+        </Typography>
+        <Typography variant="h2" className={classes.header}>
           Developer Resource Aggregator
-          </Typography>
         </Typography>
 
         <Typography variant="inherit" className={classes.loginContainer}>
-          <p className={classes.email}>{ props.resources.isLoggedin ? props.resources.currentUser.email : null }</p>
-          {props.resources.isLoggedin ?
-          <Logout variant="contained" color="primary" className={classes.logoutButton} logout={props.logout} resources={props.getResources} topics={props.getTopics}/> :
-          <Login variant="contained" color="primary" className={classes.loginButton} login={props.login}/>
-          }
+          <p className={classes.email}>
+            {props.resources.isLoggedin
+              ? props.resources.currentUser.email
+              : null}
+          </p>
+          {props.resources.isLoggedin ? (
+            <Logout
+              variant="contained"
+              color="primary"
+              className={classes.logoutButton}
+              logout={props.logout}
+              resources={props.getResources}
+              topics={props.getTopics}
+            />
+          ) : (
+            <Login
+              variant="contained"
+              // color="primary"
+              className={classes.loginButton}
+              login={props.login}
+            />
+          )}
         </Typography>
-        
       </AppBar>
 
       {/* Drawer is our sidebar navigation component, stays permanently fixed to side, as docs recommend on desktop usage */}
@@ -111,4 +140,4 @@ const MainContainer = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContainer); 
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
