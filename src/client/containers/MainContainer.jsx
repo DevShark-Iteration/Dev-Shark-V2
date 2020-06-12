@@ -23,12 +23,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   header: {
-    display: 'inline',
+    fontWeight: 600,
+    fontSize: 36,
   },
   subHeader: {
-    display: 'inline',
-    marginLeft: theme.spacing(2),
-    fontSize: 15
+
+    marginLeft: theme.spacing(12),
+    fontSize: 25
   },
   loginButton: {
     display: 'inline',
@@ -86,21 +87,21 @@ const MainContainer = (props) => {
     <Container maxWidth="lg" className={classes.root}>
       {/* AppBar, where the title of website is, stays on top*/}
       <AppBar position="fixed" className={classes.appBar}>
-        <Typography variant="h4" align="left" className={classes.header}>
+        <Typography variant="h1" align="left" className={classes.header}>
           {'</DevShark>'}
-          <Typography variant="inherit" className={classes.subHeader}>
+        </Typography>
+        <Typography variant="h2" className={classes.header}>
           Developer Resource Aggregator
           </Typography>
-        </Typography>
 
         <Typography variant="inherit" className={classes.loginContainer}>
-          <p className={classes.email}>{ props.resources.isLoggedin ? props.resources.currentUser.email : null }</p>
+          <p className={classes.email}>{props.resources.isLoggedin ? props.resources.currentUser.email : null}</p>
           {props.resources.isLoggedin ?
-          <Logout variant="contained" color="primary" className={classes.logoutButton} logout={props.logout} resources={props.getResources} topics={props.getTopics}/> :
-          <Login variant="contained" color="primary" className={classes.loginButton} login={props.login}/>
+            <Logout variant="contained" color="primary" className={classes.logoutButton} logout={props.logout} resources={props.getResources} topics={props.getTopics} /> :
+            <Login variant="contained" color="primary" className={classes.loginButton} login={props.login} />
           }
         </Typography>
-        
+
       </AppBar>
 
       {/* Drawer is our sidebar navigation component, stays permanently fixed to side, as docs recommend on desktop usage */}
