@@ -156,7 +156,7 @@ export const getUserInfo = () => {
         console.log(response, '<------------- RESPONSE IN GET USER INFO')
         dispatch({
           type: types.GET_USER_INFO,
-          payload: response.data.favResources
+          payload: response.data,
         })
       })
   }

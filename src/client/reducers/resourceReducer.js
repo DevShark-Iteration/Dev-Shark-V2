@@ -109,8 +109,9 @@ const resourceReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedin: true, // CHANGED
-        favoriteResources: action.payload,
-        topics: ['Favorites', ...state.topics]
+        favoriteResources: action.payload.favResources,
+        topics: ['Favorites', ...state.topics],
+        currentUser: { email: action.payload.email }
 
       }
 

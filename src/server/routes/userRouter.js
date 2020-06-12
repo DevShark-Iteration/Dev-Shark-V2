@@ -13,6 +13,7 @@ router.get(
     return res.status(200).json({
       user_id: res.locals.users_id,
       favResources: res.locals.favIds,
+      email: res.locals.email
     });
   }
 );

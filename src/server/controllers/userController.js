@@ -41,6 +41,7 @@ userController.validateToken = (req, res, next) => {
     const values = [decoded];
     db.query(item, values).then((query) => {
       res.locals.users_id = query.rows[0].users_id;
+      res.locals.email = decoded;
       console.log('validate token success, moving on');
       return next();
     });

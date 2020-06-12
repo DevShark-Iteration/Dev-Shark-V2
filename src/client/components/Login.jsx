@@ -149,6 +149,7 @@ const Login = (props) => {
         required
         name="loginPassword"
         label="Password"
+        type="password"
         fullWidth
         value={loginPassword}
         variant="outlined"
@@ -176,6 +177,7 @@ const Login = (props) => {
         required
         name="signupPassword"
         label="Password"
+        type="password"
         fullWidth
         value={signupPassword}
         variant="outlined"
