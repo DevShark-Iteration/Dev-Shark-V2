@@ -5,7 +5,9 @@ import * as types from '../constants/actionTypes';
 export const getTopics = () => {
   return (dispatch) => {
     axios.get('/resource/getTopics').then((response) => {
-      console.log('Response in getTopics is ', response.data);
+      for (let i = 0; i < response.data.length; i++){
+        response.data[i] = response.data[i][0].toUpperCase() + response.data[i].slice(1)
+      }
       dispatch({
         type: types.GET_TOPICS,
         payload: response.data,

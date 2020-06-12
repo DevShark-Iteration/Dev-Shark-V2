@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   loginButton: {
     display: 'inline',
     marginLeft: '50%',
-    border: '1px solid'
+    border: '1px solid',
   },
   logoutButton: {
     display: 'inline',
