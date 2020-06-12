@@ -113,16 +113,19 @@ const FeedForm = (props) => {
   // (small delay added before closing modal to simulate a brief 'thinking' period)
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      let resourceObj = { name, description, url, tech, liked, likes };
-      console.log('Sending the following resource to db:');
-      console.log(resourceObj);
-      props.addResource(resourceObj);
-      setTimeout(() => {
-        console.log('Resetting form and closing modal');
-        clearForm();
-        setOpen(false);
-      }, 250);
+    console.log(url);
+    if (url.slice(0,5) !== 'https'){
+      alert("URL MUST START WITH HTTPS")
+    } else {
+      if (validateForm()) {
+        let resourceObj = { name, description, url, tech, liked, likes };
+        props.addResource(resourceObj);
+        setTimeout(() => {
+          console.log('Resetting form and closing modal');
+          clearForm();
+          setOpen(false);
+        }, 250);
+      }
     }
   };
 
