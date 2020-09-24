@@ -25,18 +25,25 @@ export const getResource = (resource) => {
           
           dispatch({
             type:types.GET_RESOURCE,
-            payload: response.data,
+            payload: 
+            {
+              resources: response.data,
+              topic: resource
+            }
           })
         })
     }
   } else {
     return (dispatch) => {
       axios
-        .get(`/resource/${resource.toLowerCase()}`)
+        .get(`/resource/${resource}`)
         .then((response) => {
           dispatch({
             type: types.GET_RESOURCE,
-            payload: response.data,
+            payload: {
+              resources: response.data,
+              topic: resource
+            },
           });
         });
     };
@@ -61,7 +68,10 @@ export const addResource = (resource) => {
     axios.post(`/resource`, resource).then((response) => {
       dispatch({
         type: types.ADD_RESOURCE,
-        payload: response.data,
+        payload: {
+          resources: response.data,
+          currentTopic: resource.tech
+        }
       });
     });
   };

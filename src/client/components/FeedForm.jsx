@@ -68,6 +68,7 @@ const FeedForm = (props) => {
 
   // gets list of topics to populate our form's select menu items
   const techs = props.techs;
+  console.log(techs, '<- ALL THE TECHS HERE')
 
   // setting initial form states
   // as well as default values for resource object
@@ -187,7 +188,7 @@ const FeedForm = (props) => {
               return;
             }
             return (
-              <MenuItem key={index} value={elem.toLowerCase()}>
+              <MenuItem key={index} value={elem}>
                 {elem}
               </MenuItem>
             );

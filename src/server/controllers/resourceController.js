@@ -11,7 +11,9 @@ resourceController.getResources = (req, res, next) => {
   // alternate way of writing this query => 'SELECT * FROM tech JOIN resources ON resources.tech_id = tech._id WHERE tech = $1 ORDER BY likes DESC'
   item = `SELECT r.resources_id, r.name, r.description, r.url, r.likes, r.tech_id, t.tech FROM resources r, techs t WHERE t.tech = $1 and t.techs_id = r.tech_id order by likes DESC;`;
   const values = [tech_name];
-  db.query(item, values)
+  if (tech_name === 'Javascript'){
+    setTimeout(() => {
+      db.query(item, values)
     .then((query) => {
       //console.log('query.rows for getResources ->', query.rows);
       res.locals.resources = query.rows;
@@ -23,6 +25,22 @@ resourceController.getResources = (req, res, next) => {
         message: { err: `ERROR in getResources ${err}` },
       })
     );
+    }, 500)
+  } else {
+    db.query(item, values)
+    .then((query) => {
+      //console.log('query.rows for getResources ->', query.rows);
+      res.locals.resources = query.rows;
+      return next();
+    })
+    .catch((err) =>
+      next({
+        log: 'ERROR in resourceControllers.getResources',
+        message: { err: `ERROR in getResources ${err}` },
+      })
+    );
+  }
+  
 };
 
 // fetch from techs table all tech topics as an array and put it into res.locals.topics
@@ -46,9 +64,10 @@ resourceController.getTopics = (req, res, next) => {
 
 // Get's the tech id (from post tech name in the request body) to be used in adding a resource
 resourceController.getTechId = (req, res, next) => {
-  // console.log('Im in the techid', req.body.tech);
+
   // Tech is the tech name associated with a resource: can be obtained via the body or by locals
   let tech = req.body.tech;
+  console.log('what is the body ------>', tech)
   // || res.locals.resourceById.tech;
   item = `SELECT techs_id FROM techs WHERE tech = $1`;
   const values = [tech];
@@ -59,11 +78,12 @@ resourceController.getTechId = (req, res, next) => {
       res.locals.techId = query.rows[0].techs_id;
       return next();
     })
-    .catch((err) =>
+    .catch((err) => {
       next({
-        log: 'ERROR IN resourceControllers.getTechId',
+        log: `ERROR IN I AM NEW resourceControllers.getTechId -> ${err}`,
         message: { err: `ERROR in getTechId ${err}` },
       })
+    }
     );
 };
 
@@ -83,7 +103,7 @@ resourceController.addResource = (req, res, next) => {
     })
     .catch((err) =>
       next({
-        log: 'ERROR in resourceControllers.addResources',
+        log: `ERROR in resourceControllers.addResources, err -> ${err}`,
         message: { err: `ERROR in addResources ${err}` },
       })
     );

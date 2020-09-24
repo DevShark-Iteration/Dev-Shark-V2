@@ -36,7 +36,8 @@ const resourceReducer = (state = initialState, action) => {
     case types.GET_RESOURCE:
       return {
         ...state,
-        resources: action.payload,
+        resources: action.payload.resources,
+        currentTopic: action.payload.topic
       };
     // Update state with array of resources
     case types.UPDATE_TOPIC:
@@ -48,7 +49,8 @@ const resourceReducer = (state = initialState, action) => {
     case types.ADD_RESOURCE:
       return {
         ...state,
-        resources: action.payload,
+        resources: action.payload.resources,
+        currentTopic: action.payload.currentTopic
       };
     // Update state with new number of upvotes
     case types.UPVOTE:

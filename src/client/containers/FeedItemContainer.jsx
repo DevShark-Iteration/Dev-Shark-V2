@@ -2,7 +2,7 @@ import React, { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import FeedItem from '../components/FeedItem';
-
+;
 /*
 
 Renders a container showing all feed items related to a certain topic
@@ -30,23 +30,26 @@ const FeedItemContainer = (props) => {
     }
 
     return (
-      <FeedItem
-        favoriteResources={props.favoriteResources}
-        favBoolean={favBoolean}
-        name={elem.name}
-        url={elem.url}
-        description={elem.description}
-        likes={elem.likes}
-        id={elem.resources_id}
-        key={index}
-        tech={elem.tech}
-        upvote={props.upvote}
-        downvote={props.downvote}
-        liked={elem.liked}
-        addFav={props.addFav}
-        deleteFav={props.deleteFav}
-        isLoggedIn={props.isLoggedIn}
-      />
+
+        <FeedItem
+          favoriteResources={props.favoriteResources}
+          favBoolean={favBoolean}
+          name={elem.name}
+          url={elem.url}
+          description={elem.description}
+          likes={elem.likes}
+          id={elem.resources_id}
+          key={index}
+          tech={elem.tech}
+          upvote={props.upvote}
+          downvote={props.downvote}
+          liked={elem.liked}
+          addFav={props.addFav}
+          deleteFav={props.deleteFav}
+          isLoggedIn={props.isLoggedIn}
+        />
+
+
     );
   });
   return <div>{items}</div>;

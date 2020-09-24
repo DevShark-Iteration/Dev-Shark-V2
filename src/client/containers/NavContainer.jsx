@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.getResource(tech_name));
     // THIS IS A PLACEHOLDER FOR LATER EXTENSION:
     // ideally, the current topic being viewed would be stored in a (at the moment non-existent) 'users' table, so that the current topic will persist when that user refreshes. For now, we are holding that information on the front-end, in our store
-    dispatch(actions.updateTopic(tech_name));
+    // dispatch(actions.updateTopic(tech_name));
   },
   getTopics: () => {
     dispatch(actions.getTopics());
