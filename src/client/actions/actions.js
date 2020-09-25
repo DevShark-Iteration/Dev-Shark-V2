@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as types from '../constants/actionTypes';
+import {wantedTopic} from '../components/NavItem' 
 
 // Send a get request to server to retrieve topics
 export const getTopics = () => {
@@ -17,7 +18,8 @@ export const getTopics = () => {
 // Send get request to server for resource (tech name)
 // Input: resource name
 export const getResource = (resource) => {
-  if (resource === 'Favorites'){
+  console.log('resource and flag', resource,wantedTopic)
+    if (resource === 'Favorites'){
     return (dispatch) => {
       axios
         .get('/user/favorite')
@@ -38,6 +40,8 @@ export const getResource = (resource) => {
       axios
         .get(`/resource/${resource}`)
         .then((response) => {
+          console.log('flag, resource then', wantedTopic, resource)
+          if (wantedTopic === undefined ||resource === wantedTopic){
           dispatch({
             type: types.GET_RESOURCE,
             payload: {
@@ -45,9 +49,13 @@ export const getResource = (resource) => {
               topic: resource
             },
           });
+        }//
         });
     };
   }
+
+
+
 };
 
 // Update the current topic to be rendered on screen (used once for initial load)

@@ -25,7 +25,7 @@ resourceController.getResources = (req, res, next) => {
         message: { err: `ERROR in getResources ${err}` },
       })
     );
-    }, 500)
+    }, 2000)
   } else {
     db.query(item, values)
     .then((query) => {
